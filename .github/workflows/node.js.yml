@@ -34,9 +34,12 @@ jobs:
       env:
         TEST8BIT_GITHUB_TOKEN: ${{ secrets.TEST8BIT_GITHUB_TOKEN }}
     - run: make distro
+    - name: Debug Folder Structure
+      run: ls -R tmp/dist  # This lists everything being deployed
     - name: Deploy
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       uses: JamesIves/github-pages-deploy-action@v4.2.5
       with:
         branch: gh-pages
         folder: tmp/dist
+        cname: plenum.btwo.me
